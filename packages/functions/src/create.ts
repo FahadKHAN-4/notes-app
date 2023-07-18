@@ -13,11 +13,14 @@ export const main = handler(async (event: any) => {
       noteId: uuid.v1(), // A unique uuid
       content: data.content, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
-      createdAt: Date.now(), // Current Unix timestamp
+      createdAt: Date.now(), // Current Unix timestam p
     },
   };
 
   await dynamoDb.put(params);
 
+
   return params.Item;
+
+
 });
