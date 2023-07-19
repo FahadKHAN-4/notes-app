@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { calculateCost } from "../../packages/core/src/cost";
+import { calculateCost } from "../src/cost";
 
 
 
