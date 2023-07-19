@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
-import { calculateCost } from "../src/cost";
+import { calculateCost } from "../../packages/core/src/cost";
+
+
 
 test("Lowest tier", () => {
   const storage = 10;
