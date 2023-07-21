@@ -3,9 +3,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 
+import { useAppContext } from "../lib/contextLib";
+
 import { Auth } from "aws-amplify";
 
 export default function Login() {
+
+  const { userHasAuthenticated } = useAppContext();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,11 +19,12 @@ export default function Login() {
   }
 
   async function handleSubmit(event) {
+    
     event.preventDefault();
   
     try {
       await Auth.signIn(email, password);
-      alert("Logged in");
+      userHasAuthenticated(true);
     } catch (e) {
       alert(e.message);
     }
