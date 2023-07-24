@@ -4,15 +4,21 @@ import "./App.css";
 import Routes from "./Routes";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import { AppContext } from "./lib/contextLib";
+import { Auth } from "aws-amplify";
 
 function App() {
 
+  const nav = useNavigate();
+
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
-  function handleLogout() {
+  async function handleLogout() {
+    await Auth.signOut();
     userHasAuthenticated(false);
+    nav("/login");
   }
 
   return (
