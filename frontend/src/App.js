@@ -8,17 +8,21 @@ import { useNavigate } from "react-router-dom";
 
 import { AppContext } from "./lib/contextLib";
 import { Auth } from "aws-amplify";
+import { onError } from "./lib/errorLib";
 
 function App() {
-
   const nav = useNavigate();
-
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
   async function handleLogout() {
-    await Auth.signOut();
-    userHasAuthenticated(false);
-    nav("/login");
+
+    try{
+      await Auth.signOut();
+      userHasAuthenticated(false);
+      nav("/login");
+    }catch(e){
+      onError(e);
+    }
   }
 
   return (
